@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList, ListRenderItem } from 'react-native';
 import { connect } from 'react-redux';
 
 import ExampleCardDetails from './ExampleCardDetails';
@@ -17,17 +17,16 @@ class ExampleCardsList extends Component<{ cards: CardModel[] }, {cards: CardMod
     //   .then((response: Response) => console.log(response));//
   }
 
-  renderAlbums() {
-    return this.props.cards.map((card: CardModel) =>
-      <ExampleCardDetails key={card.title} album={card} />
-    );
+  renderAlbum(item) {
+    return <ExampleCardDetails key={item.item.title} album={item.item} />
   }
 
   render() {
     return (
-      <ScrollView>
-        {this.renderAlbums()}
-      </ScrollView>
+        <FlatList 
+            data={this.props.cards}
+            renderItem={this.renderAlbum}
+        />
     );
   }
 }
