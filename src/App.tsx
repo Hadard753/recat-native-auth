@@ -13,6 +13,7 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Header } from './components/common/Header';
 import { Card } from './components/common/Card';
 import { CardSection } from './components/common/CardSection';
+import { Button } from './components/common/Button';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -30,10 +31,13 @@ export default class App extends Component<Props> {
         <Card>
           <CardSection> 
             <Text style={styles.welcome}>Welcome to React Native!</Text>
-            <Text style={styles.instructions}>To get started, edit App.tsx</Text>
           </CardSection>
           <CardSection>
+            <Text style={styles.instructions}>To get started, edit App.tsx</Text>
             <Text style={styles.instructions}>{instructions}</Text>
+          </CardSection>
+          <CardSection>
+            <Button>Press Me!</Button>
           </CardSection>
         </Card>
       </View>
