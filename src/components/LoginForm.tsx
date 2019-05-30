@@ -16,6 +16,7 @@ class LoginForm extends Component<{}, LoginFormState> {
     const { email, password } = this.state;
 
     this.setState({ error: '', loading: true });
+    //TODO : take server url out to configuration file and change it to your ip address 
     fetch('http://192.168.86.165:3000/api/login', {
       method: 'POST',
       headers: {
