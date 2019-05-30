@@ -5,12 +5,20 @@ import { connect } from 'react-redux';
 import { Card, CardSection, Button } from './common';
 import { CardModel } from '../models/Card.model';
 import * as actions from '../actions';
+import { AppState } from '../models/AppState.model';
 
-class ExampleCardDetails extends Component<
-  { album: CardModel; selectCard: (cardId: number) => { type: string; payload: number } },
-  {}
-> {
-  render() {
+export interface ExampleCardProps {
+  album: CardModel;
+  selectedCardId: number;
+  selectCard: (cardId: number) => { type: string; payload: number };
+}
+
+class ExampleCardDetails extends Component<ExampleCardProps, {}> {
+    getStyle() {
+        return this.props.album.id === this.props.selectedCardId ? styles.activeCardStyle : undefined;
+    };
+  
+    render() {
     const { title, artist, thumbnail_image, image, url } = this.props.album;
     const {
       thumbnailStyle,
@@ -21,7 +29,7 @@ class ExampleCardDetails extends Component<
     } = styles;
     return (
       <TouchableWithoutFeedback onPress={() => this.props.selectCard(this.props.album.id)}>
-        <View>
+        <View style={this.getStyle()}>
           <Card>
             <CardSection>
               <View style={thumbnailContainerStyle}>
@@ -41,13 +49,17 @@ class ExampleCardDetails extends Component<
               <Button onPress={() => Linking.openURL(url)}>Buy Now</Button>
             </CardSection>
           </Card>
-        </View> 
+        </View>
       </TouchableWithoutFeedback>
     );
   }
 }
 
 const styles = StyleSheet.create({
+    activeCardStyle: {
+        borderWidth: 4, 
+        borderColor: 'green'
+    },
   headerContentStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around'
@@ -72,7 +84,11 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = (state: AppState) => {
+  return { selectedCardId: state.selectedCardId };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(ExampleCardDetails);
