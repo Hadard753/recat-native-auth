@@ -15,6 +15,7 @@ import { Card } from './components/common/Card';
 import { CardSection } from './components/common/CardSection';
 import { Button } from './components/common/Button';
 import { Field } from './components/common/Field';
+import { Spinner } from './components/common/Spinner';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -45,6 +46,9 @@ export default class App extends Component<Props> {
               onChangeText={(text) => console.log(text)}
               value="1234"
             />
+          </CardSection>
+          <CardSection>
+            <Spinner />
           </CardSection>
           <CardSection>
             <Button>Press Me!</Button>
