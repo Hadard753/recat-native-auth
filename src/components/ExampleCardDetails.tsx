@@ -1,48 +1,51 @@
-import React from 'react';
-import { Text, View, Image, Linking, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, Image, Linking, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { connect } from 'react-redux';
+
 import { Card, CardSection, Button } from './common';
 import { CardModel } from '../models/Card.model';
+import * as actions from '../actions';
 
-const ExampleCardDetails = (props: { album: CardModel }) => {
-  const { title, artist, thumbnail_image, image, url } = props.album;
-  const {
-    thumbnailStyle,
-    headerContentStyle,
-    thumbnailContainerStyle,
-    headerTextStyle,
-    imageStyle
-  } = styles;
+class ExampleCardDetails extends Component<
+  { album: CardModel; selectCard: (cardId: number) => { type: string; payload: number } },
+  {}
+> {
+  render() {
+    const { title, artist, thumbnail_image, image, url } = this.props.album;
+    const {
+      thumbnailStyle,
+      headerContentStyle,
+      thumbnailContainerStyle,
+      headerTextStyle,
+      imageStyle
+    } = styles;
+    return (
+      <TouchableWithoutFeedback onPress={() => this.props.selectCard(this.props.album.id)}>
+        <View>
+          <Card>
+            <CardSection>
+              <View style={thumbnailContainerStyle}>
+                <Image style={thumbnailStyle} source={{ uri: thumbnail_image }} />
+              </View>
+              <View style={headerContentStyle}>
+                <Text style={headerTextStyle}>{title}</Text>
+                <Text>{artist}</Text>
+              </View>
+            </CardSection>
 
-  return (
-    <Card>
-      <CardSection>
-        <View style={thumbnailContainerStyle}>
-          <Image
-            style={thumbnailStyle}
-            source={{ uri: thumbnail_image }}
-          />
-        </View>
-        <View style={headerContentStyle}>
-          <Text style={headerTextStyle}>{title}</Text>
-          <Text>{artist}</Text>
-        </View>
-      </CardSection>
+            <CardSection>
+              <Image style={imageStyle} source={{ uri: image }} />
+            </CardSection>
 
-      <CardSection>
-        <Image
-          style={imageStyle}
-          source={{ uri: image }}
-        />
-      </CardSection>
-
-      <CardSection>
-        <Button onPress={() => Linking.openURL(url)}>
-          Buy Now
-        </Button>
-      </CardSection>
-    </Card>
-  );
-};
+            <CardSection>
+              <Button onPress={() => Linking.openURL(url)}>Buy Now</Button>
+            </CardSection>
+          </Card>
+        </View> 
+      </TouchableWithoutFeedback>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   headerContentStyle: {
@@ -69,4 +72,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ExampleCardDetails;
+export default connect(
+  null,
+  actions
+)(ExampleCardDetails);

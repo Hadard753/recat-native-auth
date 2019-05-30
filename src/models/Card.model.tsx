@@ -1,4 +1,5 @@
 export interface CardModel {
+    id: number,
     title: string,
     url: string,
     image: string,

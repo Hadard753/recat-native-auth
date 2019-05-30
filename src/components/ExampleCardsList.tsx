@@ -6,16 +6,7 @@ import ExampleCardDetails from './ExampleCardDetails';
 import { CardModel } from '../models/Card.model';
 import { AppState } from '../models/AppState.model';
 
-class ExampleCardsList extends Component<{ cards: CardModel[] }, {cards: CardModel[]}> {
-//   state = { cards: [] };
-
-  componentWillMount() {
-    // fetch('https://rallycoding.herokuapp.com/api/music_albums')
-    //   .then((response: Response) => response.json().then(
-    //       (data: CardModel[]) => this.setState({ cards: data })
-    //   ));
-    //   .then((response: Response) => console.log(response));//
-  }
+class ExampleCardsList extends Component<{ cards: CardModel[] }, {}> {
 
   renderAlbum(item) {
     return <ExampleCardDetails album={item.item} />
@@ -26,7 +17,7 @@ class ExampleCardsList extends Component<{ cards: CardModel[] }, {cards: CardMod
         <FlatList 
             data={this.props.cards}
             renderItem={this.renderAlbum}
-            keyExtractor={(card) => card.title}
+            keyExtractor={(card: CardModel) => card.title}
         />
     );
   }
