@@ -10,12 +10,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { Header } from './components/common/Header';
-import { Card } from './components/common/Card';
-import { CardSection } from './components/common/CardSection';
-import { Button } from './components/common/Button';
-import { Field } from './components/common/Field';
-import { Spinner } from './components/common/Spinner';
+import { Header, Card, CardSection, Button, Field, Spinner } from './components/common';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
