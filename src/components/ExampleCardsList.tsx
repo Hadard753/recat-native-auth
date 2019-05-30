@@ -18,7 +18,7 @@ class ExampleCardsList extends Component<{ cards: CardModel[] }, {cards: CardMod
   }
 
   renderAlbum(item) {
-    return <ExampleCardDetails key={item.item.title} album={item.item} />
+    return <ExampleCardDetails album={item.item} />
   }
 
   render() {
@@ -26,6 +26,7 @@ class ExampleCardsList extends Component<{ cards: CardModel[] }, {cards: CardMod
         <FlatList 
             data={this.props.cards}
             renderItem={this.renderAlbum}
+            keyExtractor={(card) => card.title}
         />
     );
   }
