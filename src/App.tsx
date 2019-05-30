@@ -15,6 +15,7 @@ import { createStore } from 'redux';
 import { Header } from './components/common';
 import LoginForm from './components/LoginForm';
 import reducers from './reducers';
+import ExampleCardsList from './components/ExampleCardsList';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -28,7 +29,7 @@ export default class App extends Component<Props> {
       <Provider store={createStore(reducers)}>
         <View>
           <Header headerText="AppName" />
-          <LoginForm />
+          <ExampleCardsList />
         </View>
       </Provider>
     );
