@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+
 import ExampleCardDetails from './ExampleCardDetails';
+import { CardModel } from '../models/Card.model';
+import { AppState } from '../models/AppState.model';
 
-export interface Album {
-    title: string,
-    url: string,
-    image: string,
-    artist: string,
-    thumbnail_image: string
-};
-
-class ExampleCardsList extends Component<{}, {albums: Album[]}> {
-  state = { albums: [] };
+class ExampleCardsList extends Component<{ cards: CardModel[] }, {cards: CardModel[]}> {
+//   state = { cards: [] };
 
   componentWillMount() {
-    fetch('https://rallycoding.herokuapp.com/api/music_albums')
-      .then((response: Response) => response.json().then(
-          (data: Album[]) => this.setState({ albums: data })
-      ));
+    // fetch('https://rallycoding.herokuapp.com/api/music_albums')
+    //   .then((response: Response) => response.json().then(
+    //       (data: CardModel[]) => this.setState({ cards: data })
+    //   ));
     //   .then((response: Response) => console.log(response));//
   }
 
   renderAlbums() {
-    return this.state.albums.map((album: Album) =>
-      <ExampleCardDetails key={album.title} album={album} />
+    return this.props.cards.map((card: CardModel) =>
+      <ExampleCardDetails key={card.title} album={card} />
     );
   }
 
@@ -36,4 +32,8 @@ class ExampleCardsList extends Component<{}, {albums: Album[]}> {
   }
 }
 
-export default ExampleCardsList;
+const mapStateToProps = (state: AppState) => {
+    return { cards: state.cards };
+};
+
+export default connect(mapStateToProps)(ExampleCardsList);

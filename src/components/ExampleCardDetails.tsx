@@ -1,16 +1,9 @@
 import React from 'react';
 import { Text, View, Image, Linking, StyleSheet } from 'react-native';
 import { Card, CardSection, Button } from './common';
+import { CardModel } from '../models/Card.model';
 
-export interface Album {
-    title: string,
-    url: string,
-    image: string,
-    artist: string,
-    thumbnail_image: string
-};
-
-const ExampleCardDetails = (props: { album: Album }) => {
+const ExampleCardDetails = (props: { album: CardModel }) => {
   const { title, artist, thumbnail_image, image, url } = props.album;
   const {
     thumbnailStyle,
