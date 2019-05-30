@@ -9,13 +9,13 @@ import { AppState } from '../models/AppState.model';
 
 export interface ExampleCardProps {
   album: CardModel;
-  selectedCardId: number;
+  isActive?: boolean;
   selectCard: (cardId: number) => { type: string; payload: number };
 }
 
 class ExampleCardDetails extends Component<ExampleCardProps, {}> {
     getStyle() {
-        return this.props.album.id === this.props.selectedCardId ? styles.activeCardStyle : undefined;
+        return this.props.isActive ? styles.activeCardStyle : undefined;
     };
   
     render() {
@@ -84,8 +84,9 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state: AppState) => {
-  return { selectedCardId: state.selectedCardId };
+const mapStateToProps = (state: AppState, ownProps: ExampleCardProps) => {
+    let isActive = ownProps.album.id === state.selectedCardId;
+    return { isActive };
 };
 
 export default connect(
