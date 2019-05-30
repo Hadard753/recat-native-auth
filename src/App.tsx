@@ -10,7 +10,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { Header, Card, CardSection, Button, Field, Spinner } from './components/common';
+import { Header } from './components/common';
+import LoginForm from './components/LoginForm';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -25,30 +26,7 @@ export default class App extends Component<Props> {
     return (
       <View>
         <Header headerText="AppName"/>
-        <Card>
-          <CardSection> 
-            <Text style={styles.welcome}>Welcome to React Native!</Text>
-          </CardSection>
-          <CardSection>
-            <Text style={styles.instructions}>To get started, edit App.tsx</Text>
-            <Text style={styles.instructions}>{instructions}</Text>
-          </CardSection>
-          <CardSection>
-            <Field
-              label="Email"
-              placeholder="user@gmail.com"
-              key="1"
-              onChangeText={(text) => console.log(text)}
-              value="1234"
-            />
-          </CardSection>
-          <CardSection>
-            <Spinner />
-          </CardSection>
-          <CardSection>
-            <Button>Press Me!</Button>
-          </CardSection>
-        </Card>
+        <LoginForm />
       </View>
     );
   }
