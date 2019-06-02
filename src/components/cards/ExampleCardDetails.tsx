@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Text, View, Image, Linking, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Card, CardSection, Button } from './common';
-import { CardModel } from '../models/Card.model';
-import * as actions from '../actions';
-import { AppState } from '../models/AppState.model';
+import { Card, CardSection, Button } from '../common';
+import { CardModel } from '../../models/Card.model';
+import * as actions from '../../actions';
+import { AppState } from '../../models/AppState.model';
 
 export interface ExampleCardProps {
   album: CardModel;

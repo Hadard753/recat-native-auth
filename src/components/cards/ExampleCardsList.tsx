@@ -3,8 +3,8 @@ import { FlatList, ListRenderItem } from 'react-native';
 import { connect } from 'react-redux';
 
 import ExampleCardDetails from './ExampleCardDetails';
-import { CardModel } from '../models/Card.model';
-import { AppState } from '../models/AppState.model';
+import { CardModel } from '../../models/Card.model';
+import { AppState } from '../../models/AppState.model';
 
 class ExampleCardsList extends Component<{ cards: CardModel[] }, {}> {
 
