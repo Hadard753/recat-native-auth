@@ -27,3 +27,10 @@ export const loginUser = (email: string, password: string) => {
       });
   };
 };
+
+export const logout = () => {
+  Actions.auth();
+  return {
+    type: AuthActionsTypes.LOGOUT
+  };
+};

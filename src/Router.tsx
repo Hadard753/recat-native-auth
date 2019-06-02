@@ -1,29 +1,36 @@
-import React from 'react';
-import { Scene, Router, Stack } from 'react-native-router-flux';
+import React, { Component } from 'react';
+import { Scene, Router, Stack, Actions } from 'react-native-router-flux';
 import LoginForm from './components/auth/LoginForm';
-import ExampleCardsList from './components/cards/ExampleCardsList';
+import UserProfile from './components/auth/UserProfile';
+import { logout } from './actions/AuthActions';
+import { connect } from 'react-redux';
+import { AuthActionsTypes } from './models/Actions.model';
 
-const RouterComponent = () => {
-    //TODO: implement on right
+class RouterComponent extends Component<{ logout: () => { type: AuthActionsTypes} }> {
+  render() {
     return (
-        <Router>
+      <Router>
         <Stack key="root" hideNavBar>
           <Scene key="auth">
-            <Scene key="login" component={LoginForm} title="Login" initial/>
+            <Scene key="login" component={LoginForm} title="Login" initial />
           </Scene>
           <Scene key="main">
             <Scene
-              key="cards"
-              component={ExampleCardsList}
-              title="Cards"
-              rightTitle="Add"
-              onRight={() => console.log('Client trying to create new card')}
+              key="home"
+              component={UserProfile}
+              title="Welcome"
+              rightTitle="Logout"
+              onRight={this.props.logout}
               initial
             />
           </Scene>
         </Stack>
       </Router>
     );
-};
+  }
+}
 
-export default RouterComponent;
+export default connect(
+  undefined,
+  { logout }
+)(RouterComponent);
