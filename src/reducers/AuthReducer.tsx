@@ -9,14 +9,14 @@ const INITIAL_STATE: AuthState = {
     user: undefined
 };
 
-export default (state: AuthState = INITIAL_STATE, action: {type: AuthActions, payload?: any}) => {
-    console.log(action);
-    
+export default (state: AuthState = INITIAL_STATE, action: {type: AuthActions, payload?: any}): AuthState => {
     switch(action.type) {
         case AuthActions.EMAIL_CHANGED:
             return { ...state, email: action.payload};
         case AuthActions.PASSWORD_CHANGED:
             return { ...state, password: action.payload};
+        case AuthActions.LOGIN_USER_START: 
+            return { ...state, loading: true };
         case AuthActions.LOGIN_USER_SUCCESS:
             return { ...INITIAL_STATE, user: action.payload};
         case AuthActions.LOGIN_USER_FAIL:
