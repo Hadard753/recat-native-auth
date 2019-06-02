@@ -1,4 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
+import { Actions } from 'react-native-router-flux';
+
 import { AuthActions } from '../models/Actions.model';
 
 export const selectCard = (cardId: number) => {
@@ -30,6 +32,7 @@ export const loginUser = (email: string, password: string) => {
       .post('http://10.100.102.10:3000/api/login', { email, password })
       .then((response: AxiosResponse) => {
         dispatch({ type: AuthActions.LOGIN_USER_SUCCESS, payload: response.data.profile });
+        Actions.cards();
       })
       .catch((err) => {
         let message = 'An error as accord. Please try again later.';
