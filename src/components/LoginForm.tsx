@@ -22,7 +22,6 @@ class LoginForm extends Component<LoginFormProps, {}> {
   }
 
   renderButton() {
-    console.log("rendering..");
     if (this.props.authState.loading) {
       return <Spinner size="small" />;
     }
@@ -31,7 +30,6 @@ class LoginForm extends Component<LoginFormProps, {}> {
   }
 
   render() {
-    console.log("hi");
     return (
       <Card>
         <CardSection>
